@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After-Life | 사후 행정 원스톱 플랫폼</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts (Pretendard) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <style>
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e293b', // slate-800 (Deep Navy)
+                        accent: '#3b82f6',  // blue-500
+                        success: '#10b981', // emerald-500
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 flex h-screen overflow-hidden text-gray-800">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-primary text-white hidden md:flex flex-col flex-shrink-0 transition-all duration-300">
+        <!-- Logo Area -->
+        <div class="h-20 flex items-center px-6 border-b border-gray-700/50">
+            <div class="w-8 h-8 rounded bg-accent flex items-center justify-center mr-3 shadow-lg shadow-accent/30">
+                <i class="fa-solid fa-leaf text-white"></i>
+            </div>
+            <h1 class="text-xl font-bold tracking-wide">After-Life</h1>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+            <a href="#" class="flex items-center px-4 py-3 bg-white/10 rounded-xl text-white font-medium transition-all group">
+                <i class="fa-solid fa-chart-pie w-6 text-accent group-hover:scale-110 transition-transform"></i> 
+                <span>통합 대시보드</span>
+            </a>
+            <a href="#" class="flex items-center px-4 py-3 hover:bg-white/5 rounded-xl text-gray-400 hover:text-white transition-all group">
+                <i class="fa-solid fa-cart-shopping w-6 group-hover:scale-110 transition-transform"></i> 
+                <span>해지 대상 장바구니</span>
+            </a>
+            <a href="#" class="flex items-center px-4 py-3 hover:bg-white/5 rounded-xl text-gray-400 hover:text-white transition-all group">
+                <i class="fa-solid fa-file-signature w-6 group-hover:scale-110 transition-transform"></i> 
+                <span>서류 업로드 및 서명</span>
+            </a>
+            <a href="#" class="flex items-center px-4 py-3 hover:bg-white/5 rounded-xl text-gray-400 hover:text-white transition-all group">
+                <i class="fa-solid fa-user-tie w-6 group-hover:scale-110 transition-transform"></i> 
+                <span>전문가 매칭</span>
+            </a>
+        </nav>
+
+        <!-- Footer / Support -->
+        <div class="p-5 mx-4 mb-4 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50">
+            <div class="flex items-center mb-2">
+                <i class="fa-solid fa-headset text-gray-400 mr-2"></i>
+                <span class="text-sm font-semibold">고객센터</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-1">1588-0000</p>
+            <p class="text-xs text-gray-500 italic">"슬픔은 나누고, 행정은 비우고."</p>
+        </div>
+    </aside>
+
+    <!-- Main Layout -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <!-- Header -->
+        <header class="h-20 bg-white/80 backdrop-blur-md border-b border-gray-200 flex items-center justify-between px-6 lg:px-10 z-10 flex-shrink-0">
+            <div class="flex items-center gap-4">
+                <button class="md:hidden text-gray-500 hover:text-gray-700">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <h2 class="text-xl font-bold text-gray-800">진행 현황 트래킹</h2>
+            </div>
+            
+            <div class="flex items-center space-x-5">
+                <button class="text-gray-400 hover:text-gray-600 relative transition-colors">
+                    <i class="fa-regular fa-bell text-xl"></i>
+                    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+                </button>
+                <div class="h-8 w-px bg-gray-200 hidden sm:block"></div>
+                <div class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                    <div class="w-9 h-9 bg-gradient-to-tr from-accent to-blue-300 rounded-full flex items-center justify-center text-white shadow-sm">
+                        <span class="font-bold text-sm">금</span>
+                    </div>
+                    <span class="font-medium text-sm hidden sm:block">금종화 님</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-gray-400 hidden sm:block"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto p-6 lg:p-10">
+            <div class="max-w-7xl mx-auto space-y-8">
+                
+                <!-- 1. Top Card: Progress tracking -->
+                <section class="bg-white rounded-2xl shadow-soft border border-gray-100 p-6 lg:p-8 relative overflow-hidden">
+                    <!-- Background decorative element -->
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -mr-20 -mt-20 opacity-50 pointer-events-none"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+                            <div>
+                                <span class="inline-block px-3 py-1 bg-blue-50 text-accent text-xs font-semibold rounded-full mb-3 border border-blue-100">
+                                    안심상속 자격 검증 완료
+                                </span>
+                                <h3 class="text-2xl font-bold text-gray-900">고(故) 홍길동 님 사후 행정 처리 현황</h3>
+                                <p class="text-gray-500 text-sm mt-1">접수번호: #AL-202611-042</p>
+                            </div>
+                            <div class="text-right bg-gray-50 px-5 py-3 rounded-xl border border-gray-100">
+                                <p class="text-sm text-gray-500 font-medium mb-1">전체 진행률</p>
+                                <span class="text-3xl font-black text-accent">65%</span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar Container -->
+                        <div class="relative">
+                            <!-- Track -->
+                            <div class="w-full bg-gray-100 rounded-full h-3 mb-4 overflow-hidden">
+                                <!-- Fill -->
+                                <div class="bg-gradient-to-r from-blue-400 to-accent h-full rounded-full relative transition-all duration-1000 ease-out" style="width: 65%">
+                                    <!-- Shine effect -->
+                                    <div class="absolute top-0 left-0 right-0 bottom-0 bg-white/20" style="animation: shimmer 2s infinite linear;"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Milestone Labels -->
+                            <div class="flex justify-between text-xs font-medium text-gray-400 px-1 relative">
+                                <span class="text-accent flex flex-col items-center gap-1">
+                                    <div class="w-2 h-2 rounded-full bg-accent mb-0.5"></div>
+                                    신청 완료
+                                </span>
+                                <span class="text-accent flex flex-col items-center gap-1">
+                                    <div class="w-2 h-2 rounded-full bg-accent mb-0.5"></div>
+                                    서류 매핑
+                                </span>
+                                <span class="text-accent flex flex-col items-center gap-1">
+                                    <div class="w-3 h-3 rounded-full bg-accent mb-0.5 shadow-[0_0_0_4px_rgba(59,130,246,0.2)]"></div>
+                                    우체국 발송
+                                </span>
+                                <span class="flex flex-col items-center gap-1 -ml-4">
+                                    <div class="w-2 h-2 rounded-full bg-gray-300 mb-0.5"></div>
+                                    기관 심사중
+                                </span>
+                                <span class="flex flex-col items-center gap-1">
+                                    <div class="w-2 h-2 rounded-full bg-gray-300 mb-0.5"></div>
+                                    해지 완료
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Two-column grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Left Column (Timeline) -->
+                    <section class="lg:col-span-2 space-y-6">
+                        <div class="bg-white rounded-2xl shadow-soft border border-gray-100 p-6 lg:p-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <h4 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-list-check text-accent"></i> 기관별 세부 처리 현황
+                                </h4>
+                                <button class="text-sm text-gray-500 hover:text-accent font-medium transition-colors">새로고침 <i class="fa-solid fa-rotate-right ml-1"></i></button>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <!-- KB국민은행 -->
+                                <div class="group flex items-center justify-between p-4 bg-white hover:bg-gray-50 rounded-xl border border-gray-200 transition-all duration-200">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-yellow-50 text-yellow-600 rounded-xl flex items-center justify-center font-black text-lg border border-yellow-100">
+                                            KB
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2 mb-1">
+                                                <p class="font-bold text-gray-900">KB국민은행</p>
+                                                <span class="text-[10px] font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">금융/보험</span>
+                                            </div>
+                                            <p class="text-sm text-gray-600 flex items-center gap-1.5">
+                                                <i class="fa-regular fa-envelope text-gray-400"></i> 우체국 e-그린우편 등기 발송 완료
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end gap-2">
+                                        <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100 shadow-sm flex items-center gap-1.5">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> 심사 중
+                                        </span>
+                                        <span class="text-xs text-gray-400">송장: 1234-5678-90</span>
+                                    </div>
+                                </div>
+
+                                <!-- 삼성증권 -->
+                                <div class="group flex items-center justify-between p-4 bg-white hover:bg-gray-50 rounded-xl border border-gray-200 transition-all duration-200">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center font-black text-lg border border-blue-100">
+                                            SS
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2 mb-1">
+                                                <p class="font-bold text-gray-900">삼성증권</p>
+                                                <span class="text-[10px] font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">금융/보험</span>
+                                            </div>
+                                            <p class="text-sm text-gray-600 flex items-center gap-1.5">
+                                                <i class="fa-regular fa-folder-open text-gray-400"></i> 기관 서류 검토 진행 중
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end gap-2">
+                                        <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold border border-blue-100 shadow-sm flex items-center gap-1.5">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> 심사 중
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- KT 통신 -->
+                                <div class="group flex items-center justify-between p-4 bg-gray-50/50 rounded-xl border border-gray-200 transition-all duration-200 opacity-75">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-gray-200 text-gray-600 rounded-xl flex items-center justify-center font-black text-lg">
+                                            KT
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2 mb-1">
+                                                <p class="font-bold text-gray-700">KT 통신</p>
+                                                <span class="text-[10px] font-medium text-gray-500 bg-gray-200 px-2 py-0.5 rounded-full">통신/렌탈</span>
+                                            </div>
+                                            <p class="text-sm text-gray-500 flex items-center gap-1.5">
+                                                <i class="fa-regular fa-calendar-check text-gray-400"></i> 2026.11.12 정상 해지 처리됨
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end gap-2">
+                                        <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-bold border border-gray-200 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-check"></i> 해지 완료
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- 넷플릭스 -->
+                                <div class="group flex items-center justify-between p-4 bg-gray-50/50 rounded-xl border border-gray-200 transition-all duration-200 opacity-75">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center font-black text-lg border border-red-100">
+                                            N
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-2 mb-1">
+                                                <p class="font-bold text-gray-700">넷플릭스</p>
+                                                <span class="text-[10px] font-medium text-gray-500 bg-gray-200 px-2 py-0.5 rounded-full">디지털 구독</span>
+                                            </div>
+                                            <p class="text-sm text-gray-500 flex items-center gap-1.5">
+                                                <i class="fa-solid fa-laptop text-gray-400"></i> 디지털 계정 해지 완료
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end gap-2">
+                                        <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-bold border border-gray-200 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-check"></i> 해지 완료
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Right Column (Summary) -->
+                    <section class="space-y-6">
+                        
+                        <!-- 제출 서류 검증 -->
+                        <div class="bg-white rounded-2xl shadow-soft border border-gray-100 p-6 relative overflow-hidden">
+                            <h4 class="text-lg font-bold text-gray-900 mb-5 flex items-center gap-2">
+                                <i class="fa-solid fa-shield-check text-success"></i> 제출 서류 검증
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-0.5 text-success">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-800">사망진단서</p>
+                                        <p class="text-xs text-success font-medium mt-0.5 bg-green-50 inline-block px-2 py-0.5 rounded">OCR 스캔 완료</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-0.5 text-success">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-800">가족관계증명서</p>
+                                        <p class="text-xs text-gray-500 mt-0.5">정상 등록됨</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-0.5 text-success">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-800">유족 신분증</p>
+                                        <p class="text-xs text-gray-500 mt-0.5">본인 인증 완료</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3 pt-3 border-t border-gray-100">
+                                    <div class="mt-0.5 text-success">
+                                        <i class="fa-solid fa-signature"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-800">비대면 전자 위임장</p>
+                                        <p class="text-xs text-success font-medium mt-0.5 bg-green-50 inline-block px-2 py-0.5 rounded">필기자 서명 완료</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 결제 정보 요약 -->
+                        <div class="bg-primary rounded-2xl shadow-lg p-6 text-white relative overflow-hidden">
+                            <!-- Background abstract shape -->
+                            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white opacity-5 rounded-full blur-2xl pointer-events-none"></div>
+                            
+                            <h4 class="text-lg font-bold mb-6 flex items-center gap-2">
+                                <i class="fa-solid fa-receipt text-gray-300"></i> 결제 정보 요약
+                            </h4>
+                            
+                            <div class="space-y-3 mb-6">
+                                <div class="flex justify-between items-center text-sm border-b border-gray-700 pb-3">
+                                    <span class="text-gray-400">대행 기관 수</span>
+                                    <span class="font-bold">총 6개 기관</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm pb-1">
+                                    <span class="text-gray-400">대행 서비스 수수료</span>
+                                    <span class="font-bold text-lg tracking-wide">29,900원</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-800/50 rounded-xl p-4 flex items-center justify-between border border-gray-700 backdrop-blur-sm">
+                                <span class="text-sm text-gray-300 font-medium">현재 상태</span>
+                                <div class="flex items-center gap-2 text-success">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span class="font-bold text-sm">결제 완료</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
